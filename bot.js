@@ -175,9 +175,6 @@ bot.on("callback_query:data", async ctx => {
             ctx.session.step = "menu"
             await updateUserStep(ctx, "menu")
             break;
-        case "all_mosques":
-            await openSettingsMenu(ctx)
-            break;
         case "settings":
             await openSettingsMenu(ctx)
             break;

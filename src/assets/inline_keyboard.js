@@ -33,7 +33,7 @@ const InlineKeyboards = {
     menu: new InlineKeyboard()
         .webApp("Masjidlar", `https://mosque-bot.vercel.app/`)
         .row()
-        .text("Extiyojlar", "all_needs")
+        .webApp("Extiyojlar", "https://mosque-bot.vercel.app/announcements")
         .text("Sozlamalar", "settings"),
     admin_menu: new InlineKeyboard()
         .text("Masjidlar", "all_mosques")
