@@ -7,7 +7,7 @@ const messages = {
     incTelMsg: "Iltimos raqamni to'gri kiriting!",
     regSuccessMsg: "Ro'yhatdan muvaffaqiyatli o'tdingiz!",
     orderFirstStep: "Quyidagi link orqali kerakli mahsulotni rasmini (skrinshot) yoki linkini oling va botga yuboring. \n\n 👉https://telegra.ph/Aksessuarlar-03-07",
-    menuMsg: "Asosiy menyu",
+    menuMsg: "Hush kelibsiz!",
     amountMsg: "Miqdorni jo'nating:",
     sizeMsg: "O'lchamni jo'nating:",
     chooseCountMsg: "Iltimos, nechtaligini tanglang!",
