@@ -6,7 +6,7 @@ const {
     HttpError
 } = require("grammy");
 const configs = require("./src/config");
-const { askName, askPhone, setName, updateUserStep, sendMenu, setPhone, selectCategory, setCategory, openSettingsMenu, backToMenu, getUser } = require("./src/controllers/controllers");
+const { askName, askPhone, setName, updateUserStep, sendMenu, setPhone, selectCategory, setCategory, openSettingsMenu, backToMenu, getUser, changeCredentials } = require("./src/controllers/controllers");
 const { Router } = require("@grammyjs/router");
 const messages = require("./src/assets/messages");
 const InlineKeyboards = require("./src/assets/inline_keyboard");
@@ -153,6 +153,28 @@ router.route("menu", async (ctx) => {
     await sendMenu(ctx)
 })
 
+router.route(`edit_user_info:name`, async (ctx) => {
+    let a = await setName(ctx)
+    if (!a) return
+    await ctx.reply(messages.nameChagedMsg(ctx.session.user.name),{
+        parse_mode: "HTML",
+        reply_markup: InlineKeyboards.back("menu")
+    })
+    ctx.session.step = "menu"
+    await updateUserStep(ctx, ctx.session.step)
+})
+
+router.route(`edit_user_info:phone`, async (ctx) => {
+    let a = await setPhone(ctx)
+    if (!a) return
+    await ctx.reply(messages.phoneChagedMsg(ctx.session.user.phone), {
+        parse_mode: "HTML",
+        reply_markup: InlineKeyboards.back("menu")
+    })
+    ctx.session.step = "menu"
+    await updateUserStep(ctx, ctx.session.step)
+})
+
 bot.on("callback_query:data", async ctx => {
     const {
         url: command,
@@ -181,6 +203,9 @@ bot.on("callback_query:data", async ctx => {
         case "my_categories":
             await selectCategory(ctx, "remove_category")
             break;
+        case "change_user_info":
+                await changeCredentials(ctx)
+                break;
         case "back":
             await backToMenu(ctx)
             break;
