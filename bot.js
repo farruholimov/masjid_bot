@@ -155,7 +155,6 @@ router.route("menu", async (ctx) => {
 
 router.route(`edit_user_info:name`, async (ctx) => {
     let a = await setName(ctx)
-    if (!a) return
     await ctx.reply(messages.nameChagedMsg(ctx.session.user.name),{
         parse_mode: "HTML",
         reply_markup: InlineKeyboards.back("menu")
