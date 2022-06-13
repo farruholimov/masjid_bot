@@ -164,9 +164,7 @@ class Controllers {
 
         try {
             ctx.session.user.name = ctx.msg.text
-            console.log(ctx.session);
             let user = await fetchUrl(`/users/${ctx.msg.chat.id}`, "PUT", {full_name: ctx.msg.text})
-            console.log(user);
         } catch (error) {
             console.log(error);
         }
