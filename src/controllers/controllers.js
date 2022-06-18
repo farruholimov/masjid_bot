@@ -212,9 +212,10 @@ class Controllers {
     // MENU
 
     static async sendMenu(ctx, additional) {
+        const user = await Controllers.getUser(ctx)
         await ctx.reply((additional ? additional + "\n" : '') + messages.menuMsg, {
             parse_mode: "HTML",
-            reply_markup: InlineKeyboards.menu
+            reply_markup: InlineKeyboards.menu(user.telegram_id)
         })
     }
 
@@ -239,10 +240,11 @@ class Controllers {
         } = require("query-string").parseUrl(ctx.callbackQuery.data)
         switch (query.step) {
             case "menu":
+                const user = await Controllers.getUser(ctx)
                 await ctx.editMessageText(messages.menuMsg, {
                     parse_mode: "HTML",
                     message_id: ctx.callbackQuery.message.message_id,
-                    reply_markup: InlineKeyboards.menu
+                    reply_markup: InlineKeyboards.menu(user.telegram_id)
                 })
                 break;
         

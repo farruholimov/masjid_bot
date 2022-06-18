@@ -188,10 +188,11 @@ bot.on("callback_query:data", async ctx => {
             await setCategory(ctx, command)
             break;
         case "end_category":
+            const user = await getUser(ctx)
             await ctx.editMessageText(messages.regSuccessMsg+ "\n" + messages.menuMsg, {
                 message_id: ctx.callbackQuery.message.message_id,
                 parse_mode: "HTML",
-                reply_markup: InlineKeyboards.menu
+                reply_markup: InlineKeyboards.menu(user.telegram_id)
             })
             ctx.session.step = "menu"
             await updateUserStep(ctx, "menu")
