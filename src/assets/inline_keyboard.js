@@ -35,7 +35,9 @@ const InlineKeyboards = {
         .row()
         .webApp("Masjidlar", `https://mosque-bot.vercel.app/mosques`)
         .webApp("Extiyojlar", `https://mosque-bot.vercel.app`)
-        .text("Sozlamalar", "settings"),
+        .row()
+        .text("Sozlamalar", "settings")
+        .text("Fikr bildirish", "feedback"),
     admin_menu: new InlineKeyboard()
         .text("Masjidlar", "all_mosques")
         .row()
@@ -52,8 +54,6 @@ const InlineKeyboards = {
         new InlineKeyboard()
         .text("Ismni o'zgartirish", `change_user_info?step=name`)
         .text("Raqamni o'zgartirish", `change_user_info?step=phone`)
-        .row()
-        .text("Tanlangan kategoriyalar", `my_categories`)
         .row()
         .text("Orqaga", `back?step=${step}`),
     order_sections_menu: (step) =>
