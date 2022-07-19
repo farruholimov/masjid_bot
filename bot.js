@@ -6,7 +6,7 @@ const {
     HttpError
 } = require("grammy");
 const configs = require("./src/config");
-const { askName, askPhone, setName, updateUserStep, sendMenu, setPhone, selectCategory, setCategory, openSettingsMenu, backToMenu, getUser, changeCredentials } = require("./src/controllers/controllers");
+const { askName, askPhone, setName, updateUserStep, sendMenu, setPhone, selectCategory, setCategory, openSettingsMenu, backToMenu, getUser, changeCredentials, askFeedback, postFeedback } = require("./src/controllers/controllers");
 const { Router } = require("@grammyjs/router");
 const messages = require("./src/assets/messages");
 const InlineKeyboards = require("./src/assets/inline_keyboard");
@@ -146,6 +146,16 @@ router.route("phone", async (ctx) => {
     await sendMenu(ctx, messages.regSuccessMsg)
 })
 
+router.route(`feedback`, async (ctx) => {
+    let a = await postFeedback(ctx)
+    await ctx.reply("Fikringiz mas'ul shaxslarga jo'natildi",{
+        parse_mode: "HTML",
+        reply_markup: InlineKeyboards.back("menu")
+    })
+    ctx.session.step = "menu"
+    await updateUserStep(ctx, ctx.session.step)
+})
+
 router.route("category", async (ctx) => {
     await selectCategory(ctx, "select_category")
 })
@@ -181,27 +191,33 @@ bot.on("callback_query:data", async ctx => {
     } = require('query-string').parseUrl(ctx.callbackQuery.data)
 
     switch (command) {
-        case "select_category":
-            await setCategory(ctx, command)
-            break;
-        case "remove_category":
-            await setCategory(ctx, command)
-            break;
-        case "end_category":
-            const user = await getUser(ctx)
-            await ctx.editMessageText(messages.regSuccessMsg+ "\n" + messages.menuMsg, {
-                message_id: ctx.callbackQuery.message.message_id,
-                parse_mode: "HTML",
-                reply_markup: InlineKeyboards.menu
-            })
-            ctx.session.step = "menu"
-            await updateUserStep(ctx, "menu")
-            break;
+        // CATEGORY SELECTION
+        // case "select_category":
+        //     await setCategory(ctx, command)
+        //     break;
+        // case "remove_category":
+        //     await setCategory(ctx, command)
+        //     break;
+        // case "end_category":
+        //     const user = await getUser(ctx)
+        //     await ctx.editMessageText(messages.regSuccessMsg+ "\n" + messages.menuMsg, {
+        //         message_id: ctx.callbackQuery.message.message_id,
+        //         parse_mode: "HTML",
+        //         reply_markup: InlineKeyboards.menu
+        //     })
+        //     ctx.session.step = "menu"
+        //     await updateUserStep(ctx, "menu")
+        //     break;
+        // case "my_categories":
+        //     await selectCategory(ctx, "remove_category")
+        //     break;
         case "settings":
             await openSettingsMenu(ctx)
             break;
-        case "my_categories":
-            await selectCategory(ctx, "remove_category")
+        case "feedback":
+            await askFeedback(ctx)
+            ctx.session.step = "feedback"
+            await updateUserStep(ctx, ctx.session.step)
             break;
         case "change_user_info":
                 await changeCredentials(ctx)

@@ -232,6 +232,22 @@ class Controllers {
             })
 
         await ctx.answerCallbackQuery()
+    }    
+
+    static async askFeedback(ctx) {
+
+        let user = await Controllers.getUser(ctx)
+
+        await ctx.editMessageText(
+            `Matn kiriting`, {
+                parse_mode: "HTML",
+                message_id: ctx.callbackQuery.message.message_id,
+                reply_markup: {
+                    inline_keyboard: []
+                }
+            })
+
+        await ctx.answerCallbackQuery()
     }
 
     static async backToMenu(ctx) {
