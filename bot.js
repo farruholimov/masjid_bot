@@ -81,9 +81,9 @@ bot.command("start", async (ctx, next) => {
     if (user.step == "menu") {
         await sendMenu(ctx)
     }
-    else if (user.step == "category") {
-        await selectCategory(ctx, "select_category")
-    }
+    // else if (user.step == "category") {
+    //     await selectCategory(ctx, "select_category")
+    // }
 })
 
 bot.on("message", async (ctx, next) => {
@@ -141,9 +141,9 @@ router.route("name", async ctx => {
 router.route("phone", async (ctx) => {
     let p = await setPhone(ctx)
     if (!p) return
-    ctx.session.step = "category"
-    await updateUserStep(ctx, ctx.session.step)
-    await selectCategory(ctx, "select_category")
+    ctx.session.step = "menu"
+    await updateUserStep(ctx, "menu")
+    await sendMenu(ctx, messages.regSuccessMsg)
 })
 
 router.route("category", async (ctx) => {
@@ -192,7 +192,7 @@ bot.on("callback_query:data", async ctx => {
             await ctx.editMessageText(messages.regSuccessMsg+ "\n" + messages.menuMsg, {
                 message_id: ctx.callbackQuery.message.message_id,
                 parse_mode: "HTML",
-                reply_markup: InlineKeyboards.menu(user.telegram_id)
+                reply_markup: InlineKeyboards.menu
             })
             ctx.session.step = "menu"
             await updateUserStep(ctx, "menu")

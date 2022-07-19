@@ -30,11 +30,11 @@ const InlineKeyboards = {
         return menu
     },
 
-    menu: (user_id) => new InlineKeyboard()
-        .webApp("Mening hayriyalarim", `https://mosque-bot.vercel.app?current=${user_id}`)
+    menu: new InlineKeyboard()
+        .webApp("Mening hayriyalarim", `https://mosque-bot.vercel.app`)
         .row()
-        .webApp("Masjidlar", `https://mosque-bot.vercel.app/mosques?current=${user_id}`)
-        .webApp("Extiyojlar", `https://mosque-bot.vercel.app?current=${user_id}`)
+        .webApp("Masjidlar", `https://mosque-bot.vercel.app/mosques`)
+        .webApp("Extiyojlar", `https://mosque-bot.vercel.app`)
         .text("Sozlamalar", "settings"),
     admin_menu: new InlineKeyboard()
         .text("Masjidlar", "all_mosques")

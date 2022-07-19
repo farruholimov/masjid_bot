@@ -215,7 +215,7 @@ class Controllers {
         const user = await Controllers.getUser(ctx)
         await ctx.reply((additional ? additional + "\n" : '') + messages.menuMsg, {
             parse_mode: "HTML",
-            reply_markup: InlineKeyboards.menu(user.telegram_id)
+            reply_markup: InlineKeyboards.menu
         })
     }
 
@@ -244,7 +244,7 @@ class Controllers {
                 await ctx.editMessageText(messages.menuMsg, {
                     parse_mode: "HTML",
                     message_id: ctx.callbackQuery.message.message_id,
-                    reply_markup: InlineKeyboards.menu(user.telegram_id)
+                    reply_markup: InlineKeyboards.menu
                 })
                 break;
         
