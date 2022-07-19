@@ -232,12 +232,16 @@ class Controllers {
             })
 
         await ctx.answerCallbackQuery()
-    }    
+    } 
 
-    static async askFeedback(ctx) {
+    static async postFeedback(ctx) {
 
         let user = await Controllers.getUser(ctx)
 
+        const feedback = await fetchUrl(`/feedbacks`, "POST", {user_id: user.id, text: ctx.msg.text})
+    }    
+
+    static async askFeedback(ctx) {
         await ctx.editMessageText(
             `Matn kiriting`, {
                 parse_mode: "HTML",
