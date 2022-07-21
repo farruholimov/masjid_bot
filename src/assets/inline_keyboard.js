@@ -47,9 +47,9 @@ const InlineKeyboards = {
 
     user_info_menu: (step) =>
         new InlineKeyboard()
-        .text("Ismni o'zgartirish ✏️", `change_user_info?step=name`)
+        .text("✏️ Ismni o'zgartirish", `change_user_info?step=name`)
         .row()
-        .text("Raqamni o'zgartirish ✏️", `change_user_info?step=phone`)
+        .text("✏️ Raqamni o'zgartirish", `change_user_info?step=phone`)
         .row()
         .text("Orqaga ↩️", `back?step=${step}`),
 
