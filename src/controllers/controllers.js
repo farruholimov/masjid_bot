@@ -224,8 +224,8 @@ class Controllers {
         let user = await Controllers.getUser(ctx)
 
         await ctx.editMessageText(
-            `Profil:\n\n<i>Ismingiz:</i>  <b>${user.full_name}</b>
-            \n<i>Telefon raqamingiz:</i>  <b>${user.phone_number}</b>`, {
+            `👤 <i>Ismingiz:</i>  <b>${user.full_name}</b>
+            \n☎️ <i>Telefon raqamingiz:</i>  <b>${user.phone_number ? user.phone_number: "kiritilmagan"}</b>`, {
                 parse_mode: "HTML",
                 message_id: ctx.callbackQuery.message.message_id,
                 reply_markup: InlineKeyboards.user_info_menu("menu")
@@ -243,7 +243,7 @@ class Controllers {
 
     static async askFeedback(ctx) {
         await ctx.editMessageText(
-            `Matn kiriting`, {
+            `✍️ Matn kiriting`, {
                 parse_mode: "HTML",
                 message_id: ctx.callbackQuery.message.message_id,
                 reply_markup: {

@@ -31,39 +31,28 @@ const InlineKeyboards = {
     },
 
     menu: new InlineKeyboard()
-        .webApp("Mening hayriyalarim", `https://mosque-bot.vercel.app`)
+        .webApp("📃 Mening hayriyalarim", `https://mosque-bot.vercel.app`)
         .row()
-        .webApp("Masjidlar", `https://mosque-bot.vercel.app/mosques`)
-        .webApp("Extiyojlar", `https://mosque-bot.vercel.app`)
+        .webApp("🕌 Masjidlar", `https://mosque-bot.vercel.app/mosques`)
+        .webApp("🧾 Extiyojlar", `https://mosque-bot.vercel.app`)
         .row()
-        .text("Sozlamalar", "settings")
-        .text("Fikr bildirish", "feedback"),
-    admin_menu: new InlineKeyboard()
-        .text("Masjidlar", "all_mosques")
-        .row()
-        .text("E'lonlar", "all_ads")
-        .text("Sozlamalar", "settings"),
+        .text("⚙️ Sozlamalar", "settings")
+        .text("💬 Fikr bildirish", "feedback"),
 
     menu_switch: (offset, step) => new InlineKeyboard()
         .text("◀️", `prev?offset=${Number(offset) - 1}`)
         .text("▶️", `next?offset=${Number(offset) + 1}`)
         .row()
-        .text("Orqaga", `back?step=${step}`),
+        .text("Orqaga ↩️", `back?step=${step}`),
 
     user_info_menu: (step) =>
         new InlineKeyboard()
-        .text("Ismni o'zgartirish", `change_user_info?step=name`)
-        .text("Raqamni o'zgartirish", `change_user_info?step=phone`)
+        .text("👤 Ismni o'zgartirish ✏️", `change_user_info?step=name`)
+        .text("☎️ Raqamni o'zgartirish ✏️", `change_user_info?step=phone`)
         .row()
-        .text("Orqaga", `back?step=${step}`),
-    order_sections_menu: (step) =>
-        new InlineKeyboard()
-        .text("Barchasi", `all_orders`)
-        .text("Hozirgi", `current_order`)
-        .row()
-        .text("Orqaga", `back?step=${step}`),
+        .text("Orqaga ↩️", `back?step=${step}`),
 
-    back: (value) => new InlineKeyboard().text("Orqaga", `back?step=${value}`),
+    back: (value) => new InlineKeyboard().text("Orqaga ↩️", `back?step=${value}`),
 }
 
 module.exports = InlineKeyboards;

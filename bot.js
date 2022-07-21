@@ -78,7 +78,7 @@ bot.command("start", async (ctx, next) => {
     }
 
     ctx.session.step = user.step
-    if (user.step == "menu") {
+    if (user.step == "menu" || user.step == "idle") {
         await sendMenu(ctx)
     }
     // else if (user.step == "category") {
@@ -92,7 +92,7 @@ bot.on("message", async (ctx, next) => {
     let user = await getUser(ctx)
 
     if (!user) {
-        await ctx.reply("Siz ro'yxatdan o'tmagansiz! Ro'yhatdan o'tish uchun /start buyrug'ini jo'nating")
+        await ctx.reply("❗️ Siz ro'yxatdan o'tmagansiz. Ro'yhatdan o'tish uchun /start buyrug'ini jo'nating")
         return
     }
 
@@ -111,7 +111,7 @@ bot.command("menu", async (ctx) => {
     let user = await getUser(ctx)
 
     if(!user){
-        await ctx.reply("Siz ro'yxatdan o'tmagansiz! Ro'yhatdan o'tish uchun /start buyrug'ini jo'nating")
+        await ctx.reply("❗️ Siz ro'yxatdan o'tmagansiz. Ro'yhatdan o'tish uchun /start buyrug'ini jo'nating")
         return
     }
     await sendMenu(ctx)
@@ -148,7 +148,7 @@ router.route("phone", async (ctx) => {
 
 router.route(`feedback`, async (ctx) => {
     let a = await postFeedback(ctx)
-    await ctx.reply("Fikringiz mas'ul shaxslarga jo'natildi",{
+    await ctx.reply("✅ Fikringiz mas'ul shaxslarga jo'natildi",{
         parse_mode: "HTML",
         reply_markup: InlineKeyboards.back("menu")
     })
